@@ -1,8 +1,19 @@
-# Dummy HTTPS server
+# Dummy HTTP(S) server
 
 A simple test setup to play with authentication.
 
-## Setup
+
+## HTTP setup
+
+Simply run the app as root with
+```
+export PORT=80
+python app.py
+```
+If you are not root, you may let root reroute the traffic, as explained e.g. [here](https://serverfault.com/questions/112795/how-to-run-a-server-on-port-80-as-a-normal-user-on-linux)
+
+
+## HTTPS setup
 
 ### Install nginx
 Centos7:
