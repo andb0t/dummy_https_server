@@ -7,10 +7,16 @@ A simple test setup to play with authentication.
 
 Simply run the app as root with
 ```
-export PORT=80
-python app.py
+python app.py 80
+```
+or
+```
+sudo pipenv run python app.py 80
 ```
 If you are not root, you may let root reroute the traffic, as explained e.g. [here](https://serverfault.com/questions/112795/how-to-run-a-server-on-port-80-as-a-normal-user-on-linux)
+
+Now you should be able to contact the service from outisde: http://YOUR_PUBLIC_IP_OR_DOMAIN
+To receive the JSON: http://YOUR_PUBLIC_IP_OR_DOMAIN/api/dummy
 
 
 ## HTTPS setup
