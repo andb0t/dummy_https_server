@@ -17,7 +17,7 @@ def index():
 @app.route('/api/dummy/', methods=['GET'])
 def return_dummy_json():
     """Request dummy results."""
-    dummy_dict = {'info': 'hello', 'more_info': 'It seems to work'}
+    dummy_dict = {'info': 'Hello Hyve', 'more_info': 'It seems to work', 'even_more_info': 'no HTTPS...yet!'}
     return flask.jsonify(dummy_dict)
 
 
