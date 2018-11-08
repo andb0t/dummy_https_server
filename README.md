@@ -19,7 +19,7 @@ Now you should be able to contact the service from outisde: http://YOUR_PUBLIC_I
 To receive the JSON: http://YOUR_PUBLIC_IP_OR_DOMAIN/api/dummy
 
 
-## HTTPS setup
+## HTTP setup through nginx
 
 ### Install nginx
 Centos7:
@@ -27,7 +27,8 @@ Centos7:
 sudo yum install epel-release  # add the repo
 sudo yum install -y nginx  # install nginx
 sudo systemctl start nginx  # start nginx
-
+sudo systemctl enable nginx  # start at system start
+# sudo systemctl restart nginx  # restart the service
 ```
 If firewall:
 ```
@@ -35,4 +36,29 @@ sudo firewall-cmd --permanent --zone=public --add-service=http
 sudo firewall-cmd --permanent --zone=public --add-service=https
 sudo firewall-cmd --reload
 ```
-Now you should be able to contact the service from outisde: http://YOUR_PUBLIC_IP_OR_DOMAIN
+Now you should be able to contact the nginx service from outisde: http://YOUR_PUBLIC_IP_OR_DOMAIN
+
+
+
+### Start the app
+```
+pipenv run python app.py 8080 &
+```
+
+### Configure reverse proxy
+Now it's time to use nginx as reverse proxy. Allow it to reroute reqeusts:
+```
+sudo setsebool -P httpd_can_network_connect 1
+```
+Locate the `/etc/nginx/nginx.conf` file and change this:
+```
+         location / {
+         }
+```
+to this:
+```
+         location / {
+             proxy_pass http://127.0.0.1:8080;
+         }
+```
+Now restart nginx. You should now be able to contact your app from outisde: http://YOUR_PUBLIC_IP_OR_DOMAIN
