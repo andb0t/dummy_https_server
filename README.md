@@ -62,3 +62,11 @@ to this:
          }
 ```
 Now restart nginx. You should now be able to contact your app from outisde: http://YOUR_PUBLIC_IP_OR_DOMAIN
+
+
+## HTTPS setup
+```
+sudo yum install certbot-nginx
+sudo certbot --nginx -d octerix.sealedplatform.com
+chcon -Rt httpd_sys_content_t /var/www
+```
